@@ -1,6 +1,7 @@
 import { Space, Table, Tag, Button, Select,message } from 'antd';
 import { useNavigate } from 'react-router';
 import { useState, useEffect } from 'react';
+import { localUrl } from './Url';
 import axios from 'axios';
 const { Column, ColumnGroup } = Table;
 
@@ -15,7 +16,7 @@ function Taskassign() {
     Navigate("/")
   }
   useEffect(() => {
-    const url = "http://localhost:3000/user/allEmployees"
+    const url = `${localUrl}/user/allEmployees`
     axios
       .get(url)
       .then((data) => {
@@ -35,7 +36,7 @@ function Taskassign() {
       })
 
 
-    const taskurl = "http://localhost:3000/task"
+    const taskurl = `${localUrl}/task`
 
     axios
       .get(taskurl)
@@ -63,7 +64,7 @@ function Taskassign() {
       taskId: selectedTask
     }
     console.log(body)
-    const url = "http://localhost:3000/task/assignTask"
+    const url = `${localUrl}/task/assignTask`
     axios
       .post(url, body)
       .then((data) => {
