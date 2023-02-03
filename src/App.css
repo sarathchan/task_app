@@ -36,3 +36,20 @@
     transform: rotate(360deg);
   }
 }
+.Taskview{
+  position: absolute;
+  left: 55%;
+  top: 40%;
+  transform : translate(-50%,-50%);
+  width: 100%;
+}
+.TaskAssign{
+  position: absolute;
+  left: 55%;
+  top: 40%;
+  transform : translate(-50%,-50%);
+  width: 100%;
+}
+.button{
+ margin-left: 1200px;
+}

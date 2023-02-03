@@ -1,0 +1,17 @@
+.login-Card{
+  width: 300px;
+  position: absolute;
+  left: 50%;
+  top: 40%;
+  transform : translate(-50%,-50%)
+}
+.Login-Button{
+  margin-top: 20px;
+}
+.Login-emailinput{
+  margin-top: 10px;
+}
+.Login-passinput{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
