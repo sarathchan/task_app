@@ -4,7 +4,6 @@ import axios from 'axios';
 import { useNavigate } from 'react-router';
 import { localUrl } from './Url';
 
-
 function Taskview() {
   const Navigate = useNavigate();
   const [tableData, setTableData] = useState()
@@ -56,12 +55,14 @@ function Taskview() {
     }),
   };
   const handleClick = ( Row,e) => {
-    console.log("hello", e, Row);
-    console.log(typeof tableData,"tableData");
-    const src = tableData.find(src => src.Task=== Row.Task);
-    console.log(src,"src");
-    src.disabled = true
-    setTableData(tableData)
+      // console.log("hello", e, Row);
+      const src = tableData.find(src => src.Task=== Row.Task);
+      // console.log(src,"src");
+      src.disabled = true
+      // console.log(tableData);
+      setTableData([...tableData])
+    
+
     // setButtonText("done")
     // setDisabled(Row.disabled)
   }
@@ -85,10 +86,10 @@ function Taskview() {
       dataIndex: 'status',
       render: (Row,record) =>
       {
-console.log(Row.disabled,"Row")
+        console.log(Row);
         return <Button 
           type='primary'
-          disabled={Row.disabled}
+          disabled={record.disabled}
           onClick={() => { handleClick(record, Row) }}> {buttonText}</Button>
       }
 
