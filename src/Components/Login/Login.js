@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import './Login.css';
+import { UserOutlined ,LockOutlined} from '@ant-design/icons';
 import { Input, Select, Button, message } from 'antd';
 import { useNavigate } from 'react-router';
 import axios from 'axios';
@@ -46,14 +47,19 @@ function Login() {
         <h1>
           Login
         </h1>
-        <Input className='Login-emailinput'
+        <Input 
+        prefix={<UserOutlined />}className='Login-emailinput'
           placeholder="Username"
           onChange={(e) => { setEmail(e.target.value) }} />
         <Input
+        prefix={<LockOutlined />}
           className='Login-passinput'
           placeholder="Password"
           onChange={(e) => { setPassword(e.target.value) }}
-          type="password" />
+          type="password" 
+         
+         />
+          
 
         <div className='Login-Button'>
 
