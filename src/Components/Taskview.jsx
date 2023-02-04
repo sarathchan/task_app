@@ -39,9 +39,6 @@ function Taskview() {
         }
       })
 
-
-
-
   }, [])
   const rowSelection = {
     onChange: (selectedRowKeys, selectedRows) => {
