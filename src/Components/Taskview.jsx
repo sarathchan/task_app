@@ -7,7 +7,6 @@ import { localUrl } from './Url';
 function Taskview() {
   const Navigate = useNavigate();
   const [tableData, setTableData] = useState()
-  const [disabled, setDisabled] = useState(false)
   const [buttonText, setButtonText] = useState("Mark As Read")
 
   const logout = () => {
@@ -28,10 +27,10 @@ function Taskview() {
         for (let obj of data.data.message.tasks) {
           let object = {
             name: name,
-            Id: obj.assignedTo,
+            Id: obj._id,
             Task: obj.taskName,
             status: obj.taskName,
-            disabled: false,
+            disabled: obj.taskDone,
 
           }
           arr.push(object)
@@ -56,15 +55,21 @@ function Taskview() {
   };
   const handleClick = (Row, e) => {
     // console.log("hello", e, Row);
-    const src = tableData.find(src => src.Task === Row.Task);
+    const src = tableData.find(src => src.Id === Row.Id);
     // console.log(src,"src");
     src.disabled = true
-    // console.log(tableData);
     setTableData([...tableData])
+    console.log(tableData);
+    let DisableUrl = `${localUrl}/task/taskDone`
+    let body = {
+      taskId: Row.Id
+    }
+    axios
+      .post(DisableUrl, body)
+      .then((res) => {
+        console.log(res, "disable");
+      })
 
-
-    // setButtonText("done")
-    // setDisabled(Row.disabled)
   }
   const columns = [
     {
