@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Button, Tag, Row } from 'antd';
+import { Table, Button, Tag, Row, Col } from 'antd';
 import axios from 'axios';
 import { useNavigate } from 'react-router';
 import { localUrl } from './Url';
@@ -23,7 +23,7 @@ function Taskview() {
     axios
       .post(url, body)
       .then((data) => {
-        console.log(data.data.message, "channnn")
+        console.log(data.data, "channnn")
         let arr = []
         for (let obj of data.data.message.tasks) {
           let object = {
@@ -54,14 +54,14 @@ function Taskview() {
       name: record.name,
     }),
   };
-  const handleClick = ( Row,e) => {
-      // console.log("hello", e, Row);
-      const src = tableData.find(src => src.Task=== Row.Task);
-      // console.log(src,"src");
-      src.disabled = true
-      // console.log(tableData);
-      setTableData([...tableData])
-    
+  const handleClick = (Row, e) => {
+    // console.log("hello", e, Row);
+    const src = tableData.find(src => src.Task === Row.Task);
+    // console.log(src,"src");
+    src.disabled = true
+    // console.log(tableData);
+    setTableData([...tableData])
+
 
     // setButtonText("done")
     // setDisabled(Row.disabled)
@@ -84,10 +84,9 @@ function Taskview() {
     {
       title: 'Status',
       dataIndex: 'status',
-      render: (Row,record) =>
-      {
+      render: (Row, record) => {
         console.log(Row);
-        return <Button 
+        return <Button
           type='primary'
           disabled={record.disabled}
           onClick={() => { handleClick(record, Row) }}> {buttonText}</Button>
@@ -102,15 +101,30 @@ function Taskview() {
 
   return (
     <div className='Taskview'>
-      <h1>
-        Task View page
-      </h1>
-      <p>
-        hello {name}
-      </p>
-      <Button className='button' onClick={logout}>
-        Logout
-      </Button>
+
+      <Row>
+        <Col span={18} offset={2}>
+          <h1>
+            Task View page
+          </h1>
+        </Col>
+        <Col span={2}>
+          <Button className='button' danger onClick={logout}>
+            Logout
+          </Button>
+        </Col>
+
+
+
+
+      </Row>
+      <Col offset={2}>
+        <p>
+          hello {name}
+        </p>
+
+      </Col>
+
       <Table
 
         columns={columns}

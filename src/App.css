@@ -40,16 +40,25 @@
   position: absolute;
   left: 55%;
   top: 40%;
-  transform : translate(-50%,-50%);
+  display: contents;
   width: 100%;
 }
 .TaskAssign{
   position: absolute;
   left: 55%;
   top: 40%;
-  transform : translate(-50%,-50%);
+  display: contents;
   width: 100%;
 }
 .button{
- margin-left: 1200px;
+ /* margin-left: 1000px; */
+ margin-top: 20px;
+}
+
+
+.TaskAssign table {
+  padding-left: 45px;
+}
+.Taskview table{
+  padding-left: 45px;
 }

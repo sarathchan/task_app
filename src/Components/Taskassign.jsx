@@ -1,4 +1,4 @@
-import { Space, Table, Tag, Button, Select,message } from 'antd';
+import { Space, Table, Tag, Button, Select,message ,Row,Col} from 'antd';
 import { useNavigate } from 'react-router';
 import { useState, useEffect } from 'react';
 import { localUrl } from './Url';
@@ -101,20 +101,36 @@ function Taskassign() {
     {
       title: 'Action',
       dataIndex: 'action',
-      render: (record) => <Button onClick={()=>{TaskAssignn(record)}}> Add Task</Button>,
+      render: (record) => <Button type='primary' onClick={()=>{TaskAssignn(record)}}> Add Task</Button>,
     },
    
   ];
+  const handleSignup =() => {
+    Navigate("/Signup")
+  }
   return (
     <div className='TaskAssign'>
-
-      <h1>
-        Admin
+<Row>
+<Col span={16} offset={2}>
+<h1 >
+        Admin Module
       </h1>
-
-      <Button className='button' onClick={logout}>
+</Col>
+<Col span={2}>
+<Button className='button' danger  onClick={logout}>
         Logout
       </Button>
+</Col>
+<Col span={2}>
+<Button  className='button' type="primary" ghost onClick={handleSignup} >
+            Add user
+          </Button>
+</Col>
+      
+
+      
+      
+</Row>
 
       <Table
        
