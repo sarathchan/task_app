@@ -36,7 +36,7 @@ function Taskassign() {
       })
 
 
-    const taskurl = `${localUrl}/task`
+    const taskurl = `${localUrl}/task/notDone`
 
     axios
       .get(taskurl)
