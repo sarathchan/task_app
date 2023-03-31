@@ -9,6 +9,9 @@ function Login() {
   const Navigate = useNavigate();
   const [email, setEmail] = useState()
   const [Password, setPassword] = useState()
+  const [messageApi, contextHolder] = message.useMessage();
+  const [resMessage,setMessage] = useState('');
+
 
   const HandleLogin = () => {
     let body = {
@@ -17,31 +20,38 @@ function Login() {
     };
     let url = "http://localhost:3000/user/login"
     axios
-      .post(url, body)
-      .then((data) => {
-        console.log(data.data, "====")
-        window.localStorage.setItem("userId", JSON.stringify(data.data.user._id));
-        window.localStorage.setItem("name", JSON.stringify(data.data.user.username));
-        if (data.data.user.userType == "admin") {
+    .post(url, body)
+    .then((data) => {
+      console.log(data.data, "====")
+      window.localStorage.setItem("userId", JSON.stringify(data.data.user._id));
+      window.localStorage.setItem("name", JSON.stringify(data.data.user.username));
+      if (data.data.user.userType == "admin") {
+        
+        Navigate("/Assign")
+      }
+      if (data.data.user.userType == "employee") {
+        Navigate("/View")
+      }
+      if (data.status == 200) {
+        message.success(`Logged in as ${data.data.user.userType}`);
+        
+      }
+      if (data.status == 400) {
+        message.error(data.message.error);
+      }
+    })
+    .catch((errRes) => {
+      // console.log(errRes.response.data)
+      messageApi.error(errRes.response.data.message.error);
 
-          Navigate("/Assign")
-        }
-        if (data.data.user.userType == "employee") {
-          Navigate("/View")
-        }
-        if (data.status == 200) {
-          message.success(`Logged in as ${data.data.user.userType}`);
-
-        }
-        if (data.status == 400) {
-          message.error(data.message.error);
-        }
       })
 
 
   }
  
   return (
+    <>
+    {contextHolder}
     <div>
       <div className='login-Card'>
         <h1>
@@ -71,6 +81,7 @@ function Login() {
         </div>
       </div>
     </div>
+    </>
   )
 }
 

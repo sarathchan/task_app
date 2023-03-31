@@ -7,7 +7,7 @@ import { localUrl } from './Url';
 function Taskview() {
   const Navigate = useNavigate();
   const [tableData, setTableData] = useState()
-  const [buttonText, setButtonText] = useState("Mark As Read")
+  const [buttonText, setButtonText] = useState("Mark As Done")
 
   const logout = () => {
     Navigate("/")
@@ -91,7 +91,7 @@ function Taskview() {
         return <Button
           type='primary'
           disabled={record.disabled}
-          onClick={() => { handleClick(record, Row) }}> {buttonText}</Button>
+          onClick={() => { handleClick(record, Row) }}> {record.disabled ? "Completed" : buttonText}</Button>
       }
 
 

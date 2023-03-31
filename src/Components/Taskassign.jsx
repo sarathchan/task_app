@@ -108,6 +108,9 @@ function Taskassign() {
   const handleSignup =() => {
     Navigate("/Signup")
   }
+  const handleCreateTask =() => {
+    Navigate("/Create");
+  }
   return (
     <div className='TaskAssign'>
 <Row>
@@ -116,14 +119,20 @@ function Taskassign() {
         Admin Module
       </h1>
 </Col>
-<Col span={2}>
+<Col span={2}  >
 <Button className='button' danger  onClick={logout}>
         Logout
       </Button>
 </Col>
-<Col span={2}>
+<Col span={2} >
 <Button  className='button' type="primary" ghost onClick={handleSignup} >
             Add user
+          </Button>
+</Col>
+<Col span={2}>
+
+<Button  className='button' type="primary" ghost onClick={handleCreateTask} >
+            Create Task
           </Button>
 </Col>
       
