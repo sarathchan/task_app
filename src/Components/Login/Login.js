@@ -4,6 +4,7 @@ import { UserOutlined ,LockOutlined} from '@ant-design/icons';
 import { Input, Select, Button, message } from 'antd';
 import { useNavigate } from 'react-router';
 import axios from 'axios';
+import { localUrl } from "../Url";
 
 function Login() {
   const Navigate = useNavigate();
@@ -18,12 +19,14 @@ function Login() {
       username: email,
       password: Password
     };
-    let url = "http://localhost:3000/user/login"
+    // let url = "http://localhost:3000/user/login"
+    let url =  `${localUrl}/user/login`
+
     axios
     .post(url, body)
     .then((data) => {
       console.log(data.data, "====")
-      window.localStorage.setItem("userId", JSON.stringify(data.data.user._id));
+      window.localStorage.setItem("userId", JSON.stringify(data.data.user._id).replace(/"/g,''));
       window.localStorage.setItem("name", JSON.stringify(data.data.user.username));
       if (data.data.user.userType == "admin") {
         

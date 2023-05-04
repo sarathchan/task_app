@@ -4,6 +4,7 @@ import { UserOutlined ,LockOutlined} from '@ant-design/icons';
 import { Input, Select, Button, message } from 'antd';
 import { useNavigate } from 'react-router';
 import axios from 'axios';
+import { localUrl } from "./Url";
 
 function Login() {
   const Navigate = useNavigate();
@@ -16,7 +17,9 @@ function Login() {
     let body = {
      taskName 
     };
-    let url = "http://localhost:3000/task"
+    // let url = "http://localhost:3000/task"
+    let url =  `${localUrl}/task`
+
     axios
     .post(url, body)
     .then((data) => {
@@ -40,7 +43,8 @@ function Login() {
     //   }
     })
     .catch((errRes) => {
-      // console.log(errRes.response.data)
+      console.log(errRes.response.data)
+      
       messageApi.error(errRes.response.data.message.error);
 
       })

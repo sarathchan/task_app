@@ -30,6 +30,7 @@ function Taskview() {
             Id: obj._id,
             Task: obj.taskName,
             status: obj.taskName,
+            assignedBy : obj?.assignedBy?.username,
             disabled: obj.taskDone,
 
           }
@@ -70,11 +71,11 @@ function Taskview() {
   }
   const columns = [
     {
-      title: 'ID',
-      dataIndex: 'Id',
-      render: (tags) => <>
-        <Tag color="blue" key={tags}>
-          {tags}
+      title: 'Assigned By',
+      dataIndex: 'assignedBy',
+      render: (Name) => <>
+        <Tag color="blue" key={Name}>
+          {Name}
         </Tag>
 
       </>
@@ -121,9 +122,11 @@ function Taskview() {
 
       </Row>
       <Col offset={2}>
-        <p>
-          hello {name}
-        </p>
+      <center>
+          <h2>
+            <b>Hello {name}!</b>
+          </h2>
+        </center>
 
       </Col>
 

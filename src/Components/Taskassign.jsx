@@ -5,11 +5,48 @@ import { localUrl } from './Url';
 import axios from 'axios';
 const { Column, ColumnGroup } = Table;
 
+
+const dataSource1 = [
+  {
+    key: '1',
+    name: 'Mike',
+    age: 32,
+    address: '10 Downing Street',
+  },
+  {
+    key: '2',
+    name: 'John',
+    age: 42,
+    address: '10 Downing Street',
+  },
+];
+
+const columns1 = [
+  {
+    title: 'Assigned To',
+    dataIndex: 'assignedTo',
+    key: 'name',
+  },
+  {
+    title: 'Task',
+    dataIndex: 'taskName',
+    key: 'task',
+  },
+  {
+    title: 'Status',
+    dataIndex: 'taskDone',
+    renderer : (text) => {console.log(text,'from renderer'); return String(Text)} ,
+    key: 'status',
+  },
+];
+
+
 function Taskassign() {
   const [tableData, setTableData] = useState()
   const [tableoptions, setTableoptions] = useState()
   const [selectedTask, setSelectedTask] = useState()
-  const [ids, setId] = useState()
+  const [completedTasks, setCompletedTasks] = useState([])
+  // const [ids, setId] = useState()
   const Navigate = useNavigate();
 
   const logout = () => {
@@ -38,6 +75,23 @@ function Taskassign() {
 
     const taskurl = `${localUrl}/task/notDone`
 
+    
+    axios.get(`${localUrl}/task?Done=true`).then((data) => {    
+      console.log(data.data.message.tasks, "task")
+      const completed = data.data.message.tasks.map((item) => ({
+        taskName: item.taskName,
+        taskDone: item.taskDone ? "Completed" : "Not Completed",
+        assignedTo: item.assignedTo?.username,
+      }));
+      console.log(completed);
+
+      setCompletedTasks(completed)
+      // console.log(completedTasks,'completed tasks')
+    })
+    .catch((err) => {
+      console.log(err, "err");
+    })
+
     axios
       .get(taskurl)
       .then((data) => {
@@ -52,6 +106,7 @@ function Taskassign() {
         setTableoptions(options)
       })
 
+
   }, [])
   const handleChange = (value) => {
     console.log(`selected ${value}`);
@@ -59,7 +114,9 @@ function Taskassign() {
   };
   const TaskAssignn = (e) => {
     console.log(e, "22");
+    // console.log(localStorage.getItem('userId'),'assigned by');
     const body = {
+      assignedBy : localStorage.getItem('userId'),
       assignedTo: e,
       taskId: selectedTask
     }
@@ -114,7 +171,7 @@ function Taskassign() {
   return (
     <div className='TaskAssign'>
 <Row>
-<Col span={16} offset={2}>
+<Col span={14} offset={2}>
 <h1 >
         Admin Module
       </h1>
@@ -141,13 +198,33 @@ function Taskassign() {
       
 </Row>
 
+      
       <Table
        
         columns={columns}
         dataSource={tableData}
       />
 
+      <br/><br/>
+
+    <Col
+      span={14} 
+      offset={2}
+    >
+      <Row>
+        <h1> Completed Tasks </h1>
+      </Row>
+    </Col>
+      {/* <Row> */}
+
+        <Table dataSource={completedTasks} columns={columns1} />;
+      {/* </Row> */}
+
+   
+
     </div>
+
+    
   )
 }
 
