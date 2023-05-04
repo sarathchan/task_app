@@ -6,20 +6,7 @@ import axios from 'axios';
 const { Column, ColumnGroup } = Table;
 
 
-const dataSource1 = [
-  {
-    key: '1',
-    name: 'Mike',
-    age: 32,
-    address: '10 Downing Street',
-  },
-  {
-    key: '2',
-    name: 'John',
-    age: 42,
-    address: '10 Downing Street',
-  },
-];
+
 
 const columns1 = [
   {
@@ -35,7 +22,10 @@ const columns1 = [
   {
     title: 'Status',
     dataIndex: 'taskDone',
-    renderer : (text) => {console.log(text,'from renderer'); return String(Text)} ,
+    // renderer : (text) => <>
+    //   {/* <tag ></tag> */}
+
+    // </> ,
     key: 'status',
   },
 ];
