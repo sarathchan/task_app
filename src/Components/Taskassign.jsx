@@ -8,27 +8,7 @@ const { Column, ColumnGroup } = Table;
 
 
 
-const columns1 = [
-  {
-    title: 'Assigned To',
-    dataIndex: 'assignedTo',
-    key: 'name',
-  },
-  {
-    title: 'Task',
-    dataIndex: 'taskName',
-    key: 'task',
-  },
-  {
-    title: 'Status',
-    dataIndex: 'taskDone',
-    // renderer : (text) => <>
-    //   {/* <tag ></tag> */}
 
-    // </> ,
-    key: 'status',
-  },
-];
 
 
 function Taskassign() {
@@ -72,6 +52,7 @@ function Taskassign() {
         taskName: item.taskName,
         taskDone: item.taskDone ? "Completed" : "Not Completed",
         assignedTo: item.assignedTo?.username,
+        id : item._id
       }));
       console.log(completed);
 
@@ -152,6 +133,50 @@ function Taskassign() {
     },
    
   ];
+
+  const columns1 = [
+  {
+    title: 'Assigned To',
+    dataIndex: 'assignedTo',
+    key: 'name',
+  },
+  {
+    title: 'Task',
+    dataIndex: 'taskName',
+    key: 'task',
+  },
+  {
+    title: 'Status',
+    dataIndex: 'taskDone',
+    render : (text) => <>
+       <Tag color="green">{text}</Tag>
+
+    </> ,
+    key: 'status',
+  },
+   {
+      title: 'Delete',
+      render: (record) => <Button danger={true} type={'primary'} 
+      onClick={()=>{deleteTask(record.id)}}> Delete</Button>,
+    },
+   
+];
+
+function deleteTask (id) {
+  console.log(id);
+  let url = `${localUrl}/task/`
+  let body = {
+    taskId: id
+  }
+  axios.delete(url, {data : body}).then((data) => {
+    console.log(data);
+    message.success(`Task Deleted` );
+    
+  }).then(() => {
+    // reload page after delete
+    window.location.reload();
+  })
+}
   const handleSignup =() => {
     Navigate("/Signup")
   }

@@ -13,8 +13,8 @@ function Taskview() {
     Navigate("/")
   }
   useEffect(() => {
-    const userId = JSON.parse(window.localStorage.getItem('userId'));
-    const name = JSON.parse(window.localStorage.getItem('name'));
+    const userId = window.localStorage.getItem('userId');
+    const name = window.localStorage.getItem('name');
     const url = `${localUrl}/task/viewTask`
     const body = {
       userId: userId
@@ -22,7 +22,6 @@ function Taskview() {
     axios
       .post(url, body)
       .then((data) => {
-        console.log(data.data, "channnn")
         let arr = []
         for (let obj of data.data.message.tasks) {
           let object = {
